@@ -1,0 +1,1108 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Снегу-Нет43 — аккуратная ручная уборка снега и очистка крыш</title>
+    <meta
+      name="description"
+      content="Ручная уборка снега во дворах, на тротуарах и парковках. Очистка крыш от снега и сосулек. Вахруши, Слободской, Киров. Работаем аккуратно, не повреждая покрытие."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #0b2a4a;
+        --navy2: #123a66;
+        --ice: #eef4fa;
+        --line: #d9e3ee;
+        --text: #1b2a3a;
+        --muted: #5b6b7c;
+        --acc: #ff8a00;
+        --acc2: #e57800;
+        --white: #fff;
+        --r: 10px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 76px;
+      }
+      body {
+        font-family:
+          Onest,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        color: var(--text);
+        background: var(--white);
+        line-height: 1.6;
+        font-size: 17px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Unbounded, Onest, Arial, sans-serif;
+        line-height: 1.2;
+        font-weight: 700;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      section {
+        padding: 80px 0;
+      }
+      h2 {
+        font-size: clamp(24px, 3.4vw, 36px);
+        color: var(--navy);
+        margin-bottom: 14px;
+      }
+      .lead {
+        color: var(--muted);
+        max-width: 620px;
+        margin-bottom: 44px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: var(--acc);
+        color: #1a1100;
+        font:
+          600 16px Onest,
+          sans-serif;
+        padding: 14px 26px;
+        border: 0;
+        border-radius: var(--r);
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          transform 0.1s;
+        width: 100%;
+        text-align: center;
+      }
+      @media (min-width: 600px) {
+        .btn {
+          width: auto;
+        }
+      }
+      .btn:hover {
+        background: var(--acc2);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn.sm {
+        padding: 10px 18px;
+        font-size: 15px;
+      }
+      .btn.ghost {
+        background: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+      }
+      .btn.ghost:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .btn.vk {
+        background: #0077ff;
+        color: #fff;
+        margin-top: 10px;
+      }
+      .btn.vk:hover {
+        background: #0066dd;
+      }
+      :focus-visible {
+        outline: 3px solid var(--acc);
+        outline-offset: 2px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+      .hbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        height: 68px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font:
+          700 18px Unbounded,
+          sans-serif;
+        color: var(--navy);
+        text-decoration: none;
+      }
+      .logo i {
+        color: var(--acc);
+        font-size: 22px;
+      }
+      .geo {
+        color: var(--muted);
+        font-size: 14px;
+        display: none;
+      }
+      .hright {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .tel {
+        font-weight: 600;
+        color: var(--navy);
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .tel i {
+        color: var(--acc);
+        margin-right: 6px;
+      }
+      @media (min-width: 900px) {
+        .geo {
+          display: block;
+        }
+      }
+      @media (max-width: 560px) {
+        .hbar .btn {
+          display: none;
+        }
+        .logo {
+          font-size: 16px;
+        }
+      }
+
+      .hero {
+        background: var(--navy);
+        color: #fff;
+        padding: 84px 0 96px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero .wrap {
+        display: grid;
+        gap: 48px;
+        grid-template-columns: 1fr;
+        align-items: center;
+      }
+      @media (min-width: 900px) {
+        .hero .wrap {
+          grid-template-columns: 1.5fr 1fr;
+        }
+      }
+      .hero h1 {
+        font-size: clamp(28px, 4.6vw, 50px);
+        margin-bottom: 22px;
+      }
+      .hero p {
+        color: #c6d6e8;
+        max-width: 560px;
+        margin-bottom: 32px;
+        font-size: 18px;
+      }
+      .hero .acts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .stake {
+        display: none;
+        justify-self: center;
+        position: relative;
+        width: 150px;
+        height: 340px;
+        background: linear-gradient(90deg, #ffb23d, var(--acc));
+        border-radius: 10px 10px 0 0;
+      }
+      @media (min-width: 900px) {
+        .stake {
+          display: block;
+        }
+      }
+      .stake::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0 23px,
+          rgba(26, 17, 0, 0.55) 23px 25px
+        );
+        border-radius: inherit;
+      }
+      .stake span {
+        position: absolute;
+        right: 14px;
+        font:
+          700 13px Unbounded,
+          sans-serif;
+        color: #1a1100;
+      }
+      .snow {
+        position: absolute;
+        left: -12px;
+        right: -12px;
+        bottom: 0;
+        height: var(--h, 70%);
+        background: #fff;
+        border-radius: 40% 40% 0 0/14px 14px 0 0;
+        animation: melt 5s ease-in-out 0.6s 1 forwards;
+        transform-origin: bottom;
+      }
+      @keyframes melt {
+        from {
+          height: 70%;
+        }
+        to {
+          height: 12%;
+        }
+      }
+      .stake-wrap {
+        position: relative;
+        justify-self: center;
+      }
+      .stake-cap {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -34px;
+        white-space: nowrap;
+        color: #c6d6e8;
+        font-size: 14px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .snow {
+          animation: none;
+          height: 12%;
+        }
+      }
+
+      .grid2 {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      .card {
+        background: var(--ice);
+        border-radius: 14px;
+        padding: 28px;
+      }
+      .card i {
+        font-size: 26px;
+        color: var(--navy);
+        background: #fff;
+        width: 56px;
+        height: 56px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        margin-bottom: 18px;
+      }
+      .card h3 {
+        font-size: 17px;
+        color: var(--navy);
+        margin-bottom: 10px;
+      }
+      .card p {
+        color: var(--muted);
+        font-size: 15.5px;
+      }
+
+      .calc {
+        background: var(--ice);
+      }
+      .calc-box {
+        display: grid;
+        gap: 32px;
+        grid-template-columns: 1fr;
+        background: #fff;
+        border-radius: 16px;
+        padding: 32px;
+        border: 1px solid var(--line);
+      }
+      @media (min-width: 900px) {
+        .calc-box {
+          grid-template-columns: 1.2fr 1fr;
+          padding: 44px;
+        }
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        color: var(--navy);
+        margin: 0 0 8px;
+        font-size: 15px;
+      }
+      .field {
+        margin-bottom: 22px;
+      }
+      select,
+      input[type="text"],
+      input[type="tel"],
+      textarea {
+        width: 100%;
+        font: inherit;
+        padding: 13px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: var(--r);
+        background: #fff;
+        color: var(--text);
+      }
+      select:focus,
+      input:focus,
+      textarea:focus {
+        border-color: var(--navy2);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(18, 58, 102, 0.15);
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--acc);
+        height: 28px;
+      }
+      .area-val {
+        float: right;
+        font-weight: 700;
+        color: var(--navy);
+      }
+      .badge {
+        display: none;
+        margin-top: 8px;
+        color: #0d6b3a;
+        background: #e4f6ec;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      .badge.on {
+        display: block;
+      }
+      .result {
+        background: var(--navy);
+        color: #fff;
+        border-radius: 14px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .result small {
+        color: #a9bfd6;
+        font-size: 14px;
+      }
+      .price {
+        font:
+          700 clamp(30px, 4vw, 42px) Unbounded,
+          sans-serif;
+        margin: 8px 0 6px;
+      }
+      .result .note {
+        color: #a9bfd6;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .ben {
+        display: grid;
+        gap: 28px 40px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .ben div {
+        display: flex;
+        gap: 16px;
+      }
+      .ben i {
+        color: var(--acc);
+        font-size: 24px;
+        margin-top: 4px;
+        width: 28px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .ben h3 {
+        font-size: 16px;
+        color: var(--navy);
+        margin-bottom: 6px;
+      }
+      .ben p {
+        color: var(--muted);
+        font-size: 15.5px;
+      }
+
+      .geo-sec {
+        background: var(--navy);
+        color: #fff;
+      }
+      .geo-sec h2 {
+        color: #fff;
+      }
+      .geo-sec .lead {
+        color: #c6d6e8;
+      }
+      .zones {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      }
+      .zone {
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 14px;
+        padding: 26px;
+      }
+      .zone.main {
+        border-color: var(--acc);
+      }
+      .zone h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+      }
+      .zone .t {
+        color: var(--acc);
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .zone p {
+        color: #c6d6e8;
+        font-size: 15.5px;
+      }
+
+      .order {
+        background: var(--ice);
+      }
+      .order .wrap {
+        display: grid;
+        gap: 44px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 900px) {
+        .order .wrap {
+          grid-template-columns: 1fr 1.1fr;
+        }
+      }
+      .contacts li {
+        list-style: none;
+        margin: 14px 0;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+      .contacts i {
+        color: var(--acc);
+        width: 22px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .formbox {
+        background: #fff;
+        border-radius: 16px;
+        padding: 32px;
+        border: 1px solid var(--line);
+      }
+      textarea {
+        min-height: 100px;
+        resize: vertical;
+      }
+      .consent {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+      footer {
+        background: #071b32;
+        color: #9db3ca;
+        padding: 26px 0;
+        font-size: 14px;
+      }
+      footer .wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      footer a {
+        color: #c6d6e8;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(7, 27, 50, 0.85);
+        display: none;
+        place-items: center;
+        z-index: 50;
+        padding: 20px;
+        backdrop-filter: blur(4px);
+      }
+      .modal.on {
+        display: grid;
+      }
+      .mbox {
+        background: #fff;
+        border-radius: 18px;
+        padding: 40px 32px;
+        max-width: 440px;
+        width: 100%;
+        text-align: center;
+        animation: pop 0.25s ease-out;
+      }
+      @keyframes pop {
+        from {
+          transform: scale(0.92);
+          opacity: 0;
+        }
+        to {
+          transform: none;
+          opacity: 1;
+        }
+      }
+      .mbox .ok {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: var(--acc);
+        color: #1a1100;
+        display: grid;
+        place-items: center;
+        font-size: 32px;
+        margin: 0 auto 20px;
+      }
+      .mbox h3 {
+        color: var(--navy);
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+      .mbox p {
+        color: var(--muted);
+        margin-bottom: 24px;
+      }
+      .err {
+        color: #c0262d;
+        font-size: 13.5px;
+        margin-top: 6px;
+        display: none;
+      }
+      input.bad {
+        border-color: #c0262d;
+      }
+      .fallback-msg {
+        background: #fff3e0;
+        border: 1px solid #ffe0b2;
+        color: #e65100;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        font-size: 14px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap hbar">
+        <a href="#top" class="logo"
+          ><i class="fa-regular fa-snowflake"></i>Снегу-Нет43</a
+        >
+        <div class="geo">Вахруши • Слободской • Киров</div>
+        <div class="hright">
+          <a class="tel" href="tel:+79127063203"
+            ><i class="fa-solid fa-phone"></i>+7 (912) 706-32-03</a
+          >
+          <a href="#order" class="btn sm">Вызвать бригаду</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap">
+          <div>
+            <h1>Аккуратная ручная уборка снега и очистка крыш</h1>
+            <p>
+              Работаем там, где не проедет техника. Бережно очищаем дворы,
+              тротуары и парковки, не повреждая брусчатку, газоны и заборы.
+              Выезжаем в день обращения.
+            </p>
+            <div class="acts">
+              <a href="#calc" class="btn"
+                ><i class="fa-solid fa-calculator"></i>Рассчитать стоимость</a
+              >
+              <a href="https://vk.me/greme231" target="_blank" class="btn ghost"
+                ><i class="fa-brands fa-vk"></i>Написать ВКонтакте</a
+              >
+            </div>
+          </div>
+          <div class="stake-wrap" aria-hidden="true">
+            <div class="stake">
+              <span style="top: 2px">80</span><span style="top: 98px">60</span
+              ><span style="top: 194px">40</span
+              ><span style="top: 290px">20</span>
+              <div class="snow"></div>
+            </div>
+            <div class="stake-cap">высота снега, см</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="wrap">
+          <h2>Что мы делаем</h2>
+          <p class="lead">
+            Специализируемся на ручной работе и сложных участках, где важна
+            аккуратность.
+          </p>
+          <div class="grid2">
+            <div class="card">
+              <i class="fa-solid fa-person-digging"></i>
+              <h3>Ручная уборка снега</h3>
+              <p>
+                Дворы частных домов, узкие проезды, тротуары, крыльца магазинов
+                и офисов. Работаем лопатами и скребками, не царапая покрытие.
+              </p>
+            </div>
+            <div class="card">
+              <i class="fa-solid fa-house-chimney"></i>
+              <h3>Очистка крыш и сосулек</h3>
+              <p>
+                Безопасный сброс снега и наледи с кровли. Работаем со
+                страховочным снаряжением, ограждаем зону внизу для безопасности
+                прохожих.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="calc" class="calc">
+        <div class="wrap">
+          <h2>Узнайте примерную цену</h2>
+          <p class="lead">
+            Точную стоимость назовём после уточнения объёма снега и сложности
+            подъезда.
+          </p>
+          <div class="calc-box">
+            <div>
+              <div class="field">
+                <label for="svc">Услуга</label>
+                <select id="svc">
+                  <option value="35">
+                    Уборка снега вручную (дворы, дорожки)
+                  </option>
+                  <option value="120">
+                    Очистка крыши и сосулек (за м² кровли)
+                  </option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="city">Город</label>
+                <select id="city">
+                  <option value="1">Вахруши</option>
+                  <option value="1">Слободской</option>
+                  <option value="1.2">Киров</option>
+                </select>
+                <div class="badge" id="fast">
+                  <i class="fa-solid fa-bolt"></i> Мы рядом: подача 30–40 минут
+                </div>
+              </div>
+              <div class="field">
+                <label for="area"
+                  >Площадь территории
+                  <span class="area-val" id="areaVal">500 м²</span></label
+                >
+                <input
+                  type="range"
+                  id="area"
+                  min="50"
+                  max="2000"
+                  step="10"
+                  value="500"
+                />
+              </div>
+            </div>
+            <div class="result">
+              <small>Примерная стоимость</small>
+              <div class="price" id="price">от 3 500 руб.</div>
+              <div class="note" id="cnote">Минимальный заказ — 500 руб.</div>
+              <button class="btn" type="button" id="calcSend">
+                <i class="fa-solid fa-paper-plane"></i>Заказать по этой цене
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="benefits">
+        <div class="wrap">
+          <h2>Почему выбирают ручную уборку у нас</h2>
+          <p class="lead" style="margin-bottom: 44px">
+            Договариваемся один раз и не возвращаемся к цене.
+          </p>
+          <div class="ben">
+            <div>
+              <i class="fa-solid fa-shield-halved"></i>
+              <span
+                ><h3>Бережное отношение</h3>
+                <p>
+                  Не ломаем брусчатку, бордюры, газонные ограждения и заборы, в
+                  отличие от тяжелой техники.
+                </p></span
+              >
+            </div>
+            <div>
+              <i class="fa-solid fa-lock"></i>
+              <span
+                ><h3>Фиксированная цена</h3>
+                <p>
+                  Стоимость согласуем до начала работ по фото или на месте, и не
+                  меняем её по ходу дела.
+                </p></span
+              >
+            </div>
+            <div>
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span
+                ><h3>Любая форма оплаты</h3>
+                <p>
+                  Наличный и безналичный расчёт. Для юрлиц работаем с НДС и без,
+                  выдаём закрывающие документы.
+                </p></span
+              >
+            </div>
+            <div>
+              <i class="fa-solid fa-clock"></i>
+              <span
+                ><h3>Работаем 24/7</h3>
+                <p>
+                  В снегопад выезжаем рано утром и в выходные, чтобы к утру у
+                  вас было чисто и безопасно.
+                </p></span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="geo" class="geo-sec">
+        <div class="wrap">
+          <h2>Где работаем</h2>
+          <p class="lead">
+            Базируемся в Вахрушах, поэтому в соседние районы доезжаем
+            максимально быстро.
+          </p>
+          <div class="zones">
+            <div class="zone main">
+              <span class="t">Подача 30–40 минут</span>
+              <h3>Вахруши</h3>
+              <p>
+                Частные дома, магазины, небольшие базы и придомовые территории.
+              </p>
+            </div>
+            <div class="zone main">
+              <span class="t">Подача 30–40 минут</span>
+              <h3>Слободской</h3>
+              <p>
+                Дворы, парковки, входные группы зданий, управляющие компании и
+                ТСЖ.
+              </p>
+            </div>
+            <div class="zone">
+              <span class="t">По согласованию</span>
+              <h3>Киров</h3>
+              <p>
+                Выезжаем на объекты большой площади или по графику на
+                абонентское обслуживание.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="order" class="order">
+        <div class="wrap">
+          <div>
+            <h2>Оставьте заявку на очистку</h2>
+            <p class="lead" style="margin-bottom: 24px">
+              Перезвоним в течение 15 минут, уточним задачу и назовём точную
+              цену.
+            </p>
+            <ul class="contacts">
+              <li>
+                <i class="fa-solid fa-phone"></i
+                ><a href="tel:+79127063203">+7 (912) 706-32-03</a>
+              </li>
+              <li>
+                <i class="fa-brands fa-vk"></i
+                ><a href="https://vk.me/greme231">Написать ВКонтакте</a>
+              </li>
+              <li>
+                <i class="fa-solid fa-location-dot"></i>Вахруши • Слободской •
+                Киров, Кировская область
+              </li>
+              <li>
+                <i class="fa-regular fa-clock"></i>Круглосуточно в сезон
+                снегопадов
+              </li>
+            </ul>
+          </div>
+          <form class="formbox" id="leadForm" novalidate>
+            <div class="field">
+              <label for="name">Имя</label>
+              <input
+                type="text"
+                id="name"
+                autocomplete="name"
+                placeholder="Как к вам обращаться"
+              />
+            </div>
+            <div class="field">
+              <label for="phone">Телефон</label>
+              <input
+                type="tel"
+                id="phone"
+                autocomplete="tel"
+                placeholder="Ваш номер телефона"
+              />
+              <div class="err" id="perr">
+                Введите корректный номер телефона, чтобы мы могли перезвонить
+              </div>
+            </div>
+            <div class="field">
+              <label for="msg">Комментарий</label>
+              <textarea
+                id="msg"
+                placeholder="Что убрать, примерная площадь, адрес"
+              ></textarea>
+            </div>
+            <button class="btn" type="submit" id="submitBtn">
+              <i class="fa-solid fa-paper-plane"></i>Отправить заявку
+            </button>
+
+            <div class="fallback-msg" id="fallbackMsg">
+              <i class="fa-solid fa-triangle-exclamation"></i> Не удалось
+              отправить форму. <br />Нажмите кнопку ниже, чтобы отправить заявку
+              нам ВКонтакте:
+              <a
+                id="vkFallbackLink"
+                href="https://vk.me/greme231"
+                target="_blank"
+                class="btn vk"
+                style="margin-top: 10px"
+              >
+                <i class="fa-brands fa-vk"></i> Отправить через ВКонтакте
+              </a>
+            </div>
+
+            <p class="consent">
+              Нажимая кнопку, вы соглашаетесь с
+              <a href="#privacy" id="privLink">политикой конфиденциальности</a>.
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span
+          >© <span id="yr">2024</span> Снегу-Нет43. Аккуратная уборка
+          снега.</span
+        >
+        <span><a href="#" id="privLink2">Политика конфиденциальности</a></span>
+      </div>
+    </footer>
+
+    <div
+      class="modal"
+      id="okModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="okT"
+    >
+      <div class="mbox">
+        <div class="ok"><i class="fa-solid fa-check"></i></div>
+        <h3 id="okT">Заявка принята</h3>
+        <p>Мы свяжемся с вами в течение 15 минут для уточнения деталей.</p>
+        <button class="btn" type="button" id="okClose">Хорошо</button>
+      </div>
+    </div>
+
+    <div
+      class="modal"
+      id="privModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="pvT"
+    >
+      <div class="mbox" style="text-align: left">
+        <h3 id="pvT">Политика конфиденциальности</h3>
+        <p>
+          Имя и телефон из заявки мы используем только для связи с вами по
+          вопросу уборки снега. Мы не передаём эти данные третьим лицам и
+          удаляем их по вашему первому требованию.
+        </p>
+        <button class="btn" type="button" id="pvClose" style="margin-top: 20px">
+          Понятно
+        </button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var $ = function (id) {
+          return document.getElementById(id);
+        };
+
+        var BOT_TOKEN = "8896259353:AAEoY_B6We2fQ3WGgnio83UABeGVjzRfDks";
+        var CHAT_ID = "1322481070";
+
+        var svc = $("svc"),
+          city = $("city"),
+          area = $("area");
+
+        function fmt(n) {
+          return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
+        }
+
+        function calc() {
+          var a = +area.value,
+            rate = +svc.value,
+            k = +city.value;
+          var p = Math.max(500, Math.round((a * rate * k) / 100) * 100);
+          $("areaVal").textContent = fmt(a) + " м²";
+          $("price").textContent = "от " + fmt(p) + " руб.";
+          var fast = city.selectedIndex < 2;
+          $("fast").classList.toggle("on", fast);
+          $("cnote").textContent = fast
+            ? "Минимальный заказ — 500 руб."
+            : "Киров: выезд по графику или на крупные объекты. Минимум — 500 руб.";
+        }
+
+        [svc, city, area].forEach(function (e) {
+          e.addEventListener("input", calc);
+        });
+        calc();
+
+        var ok = $("okModal");
+        function openOk() {
+          ok.classList.add("on");
+          $("okClose").focus();
+        }
+        function closeAll() {
+          document.querySelectorAll(".modal").forEach(function (m) {
+            m.classList.remove("on");
+          });
+        }
+
+        $("okClose").onclick = closeAll;
+        $("pvClose").onclick = closeAll;
+        document.querySelectorAll(".modal").forEach(function (m) {
+          m.addEventListener("click", function (e) {
+            if (e.target === m) closeAll();
+          });
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeAll();
+        });
+
+        $("calcSend").onclick = function () {
+          $("msg").value =
+            "Расчёт с сайта: " +
+            svc.options[svc.selectedIndex].text +
+            ", " +
+            city.options[city.selectedIndex].text +
+            ", " +
+            area.value +
+            " м², " +
+            $("price").textContent;
+          $("order").scrollIntoView({ behavior: "smooth" });
+          $("phone").focus();
+        };
+
+        $("leadForm").addEventListener("submit", function (e) {
+          e.preventDefault();
+          var ph = $("phone"),
+            digits = ph.value.replace(/\D/g, "");
+          var bad = digits.length < 10;
+
+          ph.classList.toggle("bad", bad);
+          $("perr").style.display = bad ? "block" : "none";
+          $("fallbackMsg").style.display = "none";
+
+          if (bad) {
+            ph.focus();
+            return;
+          }
+
+          var name = $("name").value.trim();
+          var msg = $("msg").value.trim();
+          var btn = $("submitBtn");
+          var originalBtnText = btn.innerHTML;
+
+          btn.disabled = true;
+          btn.innerHTML =
+            '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
+
+          fetch("/api/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name, phone: ph.value, msg: msg }),
+          })
+            .then(function (response) {
+              if (response.ok) {
+                $("leadForm").reset();
+                openOk();
+              } else {
+                throw new Error("Ошибка сервера");
+              }
+            })
+            .catch(function (error) {
+              console.error("Ошибка:", error);
+              $("fallbackMsg").style.display = "block";
+              $("vkFallbackLink").href = "https://vk.me/greme231";
+            })
+            .finally(function () {
+              btn.disabled = false;
+              btn.innerHTML = originalBtnText;
+            });
+        });
+
+        function priv(e) {
+          e.preventDefault();
+          $("privModal").classList.add("on");
+          $("pvClose").focus();
+        }
+        $("privLink").onclick = priv;
+        $("privLink2").onclick = priv;
+        $("yr").textContent = new Date().getFullYear();
+      })();
+    </script>
+  </body>
+</html>
