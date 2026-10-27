@@ -623,8 +623,36 @@
         font-size: 14px;
         display: none;
       }
+      .mapcard{background:#fff;border-radius:16px;padding:14px;margin-bottom:24px;color:var(--text)}
+      .mapcard svg{width:100%;height:auto;display:block}
+      .mapbg{fill:#f3f4ef}
+      .forest{fill:#dbe9d0;stroke:#dbe9d0;stroke-width:26;stroke-linejoin:round}
+      .river{fill:none;stroke:#b4d6f1;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+      .town{fill:#e6e7e3}
+      .road{fill:none;stroke:#9fb3c8;stroke-width:6;stroke-linecap:round;stroke-dasharray:2 12}
+      .pin{cursor:pointer}
+      .pin circle{fill:var(--navy);stroke:#fff;stroke-width:3;transition:r .15s}
+      .pin.home circle{fill:var(--acc)}
+      .pin.kir circle{fill:#fff;stroke:var(--navy);stroke-width:5}
+      .pin.on circle{stroke:var(--acc);stroke-width:6}
+      .pin text{font:600 15px Onest,sans-serif;fill:var(--navy);paint-order:stroke;stroke:#fff;stroke-opacity:.9;stroke-width:4px;stroke-linejoin:round}
+      .pin:focus{outline:none}.pin:focus-visible circle{stroke:var(--acc);stroke-width:6}
+      .mapinfo{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;align-items:center;padding:12px 6px 4px;color:var(--text);font-size:15.5px}
+      .mapinfo a{color:var(--navy2);font-weight:600}
+      .legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:2px 6px 6px;font-size:13.5px;color:var(--muted)}
+      .legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+      .callbar{display:none}
+      @media(max-width:700px){
+        body{padding-bottom:62px}
+        .callbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);padding:9px 14px;gap:10px;box-shadow:0 -2px 12px rgba(0,0,0,.2)}
+        .callbar a{flex:1;text-align:center;justify-content:center}
+      }
+      .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
     </style>
-  </head>
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Снегу-Нет43","description":"Уборка снега вручную и очистка крыш. Вахруши, Слободской, Киров.","telephone":"+79127063203","priceRange":"от 1200 ₽","areaServed":["Вахруши","Слободской","Слободской район","Киров"],"openingHours":"Mo-Su 00:00-24:00","address":{"@type":"PostalAddress","addressRegion":"Кировская область","addressCountry":"RU"}}
+</script>
+</head>
   <body>
     <header>
       <div class="wrap hbar">
@@ -705,52 +733,33 @@
         <div class="wrap">
           <h2>Узнайте примерную цену</h2>
           <p class="lead">
-            Точную стоимость назовём после уточнения объёма снега и сложности
-            подъезда.
+            Считаем по площади: уборка вручную от 1 200 руб. за 50 м². Точную стоимость назовём после уточнения объёма снега и подъезда.
           </p>
           <div class="calc-box">
             <div>
               <div class="field">
                 <label for="svc">Услуга</label>
                 <select id="svc">
-                  <option value="35">
-                    Уборка снега вручную (дворы, дорожки)
-                  </option>
-                  <option value="120">
-                    Очистка крыши и сосулек (за м² кровли)
-                  </option>
+                  <option value="24">Уборка снега вручную (дворы, дорожки)</option>
+                  <option value="120">Очистка крыши и сосулек (за м² кровли)</option>
                 </select>
               </div>
               <div class="field">
-                <label for="city">Город</label>
-                <select id="city">
-                  <option value="1">Вахруши</option>
-                  <option value="1">Слободской</option>
-                  <option value="1.2">Киров</option>
-                </select>
+                <label for="city">Где работать</label>
+                <select id="city"></select>
                 <div class="badge" id="fast">
                   <i class="fa-solid fa-bolt"></i> Мы рядом: подача 30–40 минут
                 </div>
               </div>
               <div class="field">
-                <label for="area"
-                  >Площадь территории
-                  <span class="area-val" id="areaVal">500 м²</span></label
-                >
-                <input
-                  type="range"
-                  id="area"
-                  min="50"
-                  max="2000"
-                  step="10"
-                  value="500"
-                />
+                <label for="area">Площадь территории <span class="area-val" id="areaVal">500 м²</span></label>
+                <input type="range" id="area" min="50" max="2000" step="10" value="500" />
               </div>
             </div>
             <div class="result">
               <small>Примерная стоимость</small>
-              <div class="price" id="price">от 3 500 руб.</div>
-              <div class="note" id="cnote">Минимальный заказ — 500 руб.</div>
+              <div class="price" id="price">от 1 200 руб.</div>
+              <div class="note" id="cnote"></div>
               <button class="btn" type="button" id="calcSend">
                 <i class="fa-solid fa-paper-plane"></i>Заказать по этой цене
               </button>
@@ -791,8 +800,7 @@
               <span
                 ><h3>Любая форма оплаты</h3>
                 <p>
-                  Наличный и безналичный расчёт. Для юрлиц работаем с НДС и без,
-                  выдаём закрывающие документы.
+                  Наличный и безналичный расчёт. Для организаций заключаем договор и выдаём закрывающие документы.
                 </p></span
               >
             </div>
@@ -814,32 +822,44 @@
         <div class="wrap">
           <h2>Где работаем</h2>
           <p class="lead">
-            Базируемся в Вахрушах, поэтому в соседние районы доезжаем
-            максимально быстро.
+            Базируемся в Вахрушах, поэтому в Слободской и соседние посёлки
+            доезжаем быстро. Нажмите на точку на карте, чтобы увидеть время подачи и цену выезда.
           </p>
+          <div class="mapcard">
+            <svg id="map" viewBox="0 0 600 440" role="group" aria-label="Схема зон работы"></svg>
+            <div class="legend">
+              <span><i style="background:var(--acc)"></i>подача 30–40 минут</span>
+              <span><i style="background:var(--navy)"></i>посёлки и деревни вокруг</span>
+              <span><i style="background:#fff;border:3px solid var(--navy);width:9px;height:9px"></i>Киров</span>
+              <span>Схема, не в масштабе</span>
+            </div>
+            <div class="mapinfo" id="mapInfo"></div>
+          </div>
           <div class="zones">
             <div class="zone main">
-              <span class="t">Подача 30–40 минут</span>
+              <span class="t">Подача 30–40 минут · выезд бесплатно</span>
               <h3>Вахруши</h3>
-              <p>
-                Частные дома, магазины, небольшие базы и придомовые территории.
-              </p>
+              <p>Наша база рядом: частные дома, магазины, небольшие базы и придомовые территории.</p>
             </div>
             <div class="zone main">
-              <span class="t">Подача 30–40 минут</span>
-              <h3>Слободской</h3>
-              <p>
-                Дворы, парковки, входные группы зданий, управляющие компании и
-                ТСЖ.
-              </p>
+              <span class="t">Подача 30–40 минут · выезд +100 руб.</span>
+              <h3>Слободской, Стулово, Межколхозстрой</h3>
+              <p>Дворы, парковки, входные группы зданий, управляющие компании и ТСЖ.</p>
             </div>
             <div class="zone">
-              <span class="t">По согласованию</span>
+              <span class="t">Подача 40–60 минут · выезд +200–300 руб.</span>
+              <h3>Посёлки по пути в Киров</h3>
+              <p>Денисовы, Зониха (+200), Шихово, Бобино, Порошино (+300).</p>
+            </div>
+            <div class="zone">
+              <span class="t">Подача от 60 минут · выезд +800 руб.</span>
+              <h3>Совье</h3>
+              <p>Дальний выезд: лучше договориться заранее, чтобы заехать за один рейс.</p>
+            </div>
+            <div class="zone">
+              <span class="t">По графику · выезд +500 руб.</span>
               <h3>Киров</h3>
-              <p>
-                Выезжаем на объекты большой площади или по графику на
-                абонентское обслуживание.
-              </p>
+              <p>Объекты большой площади или абонентское обслуживание.</p>
             </div>
           </div>
         </div>
@@ -873,6 +893,7 @@
             </ul>
           </div>
           <form class="formbox" id="leadForm" novalidate>
+            <div class="hp" aria-hidden="true"><label>Сайт<input type="text" id="website" tabindex="-1" autocomplete="off" /></label></div>
             <div class="field">
               <label for="name">Имя</label>
               <input
@@ -906,18 +927,13 @@
             </button>
 
             <div class="fallback-msg" id="fallbackMsg">
-              <i class="fa-solid fa-triangle-exclamation"></i> Не удалось
-              отправить форму. <br />Нажмите кнопку ниже, чтобы отправить заявку
-              нам ВКонтакте:
-              <a
-                id="vkFallbackLink"
-                href="https://vk.me/greme231"
-                target="_blank"
-                class="btn vk"
-                style="margin-top: 10px"
-              >
-                <i class="fa-brands fa-vk"></i> Отправить через ВКонтакте
-              </a>
+              <i class="fa-solid fa-triangle-exclamation"></i> Заявка не ушла.
+              <br />Позвоните нам или напишите во ВКонтакте, ответим сразу:
+              <div id="errCode" style="font-size:13px;opacity:.8;margin-top:6px"></div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
+                <a href="tel:+79127063203" class="btn sm"><i class="fa-solid fa-phone"></i> Позвонить</a>
+                <a id="vkFallbackLink" href="https://vk.me/greme231" target="_blank" rel="noopener" class="btn vk sm"><i class="fa-brands fa-vk"></i> ВКонтакте</a>
+              </div>
             </div>
 
             <p class="consent">
@@ -974,15 +990,58 @@
       </div>
     </div>
 
+    <div class="callbar">
+      <a class="btn" href="tel:+79127063203"><i class="fa-solid fa-phone"></i>Позвонить</a>
+      <a class="btn" style="background:#fff" href="#calc">Цена</a>
+    </div>
     <script>
       (function () {
         var $ = function (id) {
           return document.getElementById(id);
         };
 
-        var BOT_TOKEN = "8896259353:AAEoY_B6We2fQ3WGgnio83UABeGVjzRfDks";
-        var CHAT_ID = "1322481070";
-
+        var ZONES = [
+          // x, y — положение на карте (в пикселях скриншота Яндекс Карт), lp — где подпись: t/b/l/r
+          { id: "vah", n: "Вахруши", x: 1383, y: 998, fee: 0, t: "подача 30–40 мин", home: 1, lp: "b" },
+          { id: "slo", n: "Слободской", x: 1830, y: 715, fee: 100, t: "подача 30–40 мин", home: 1, lp: "t" },
+          { id: "stu", n: "Стулово", x: 1706, y: 778, fee: 100, t: "подача 30–40 мин", home: 1, lp: "l" },
+          { id: "mkh", n: "Межколхозстрой", x: 1762, y: 973, fee: 100, t: "подача 30–40 мин", home: 1, lp: "b" },
+          { id: "den", n: "Денисовы", x: 1755, y: 537, fee: 200, t: "подача 40–50 мин", lp: "l" },
+          { id: "zon", n: "Зониха", x: 953, y: 1158, fee: 200, t: "подача 40–50 мин", lp: "t" },
+          { id: "shi", n: "Шихово", x: 838, y: 1245, fee: 300, t: "подача 40–60 мин", lp: "b" },
+          { id: "bob", n: "Бобино", x: 626, y: 875, fee: 300, t: "подача 40–60 мин", lp: "l" },
+          { id: "por", n: "Порошино", x: 743, y: 1388, fee: 300, t: "подача 40–60 мин", lp: "b" },
+          { id: "sov", n: "Совье", x: 1085, y: 230, fee: 800, t: "подача 60+ мин", lp: "b" },
+          { id: "kir", n: "Киров", x: 360, y: 1415, fee: 500, t: "по графику", kir: 1, lp: "b" },
+          { id: "oth", n: "Другое место", fee: 300, t: "цену уточним по звонку" },
+        ];
+        var ROADS = [
+          // главная трасса Киров — Вахруши — Слободской
+          { w: 6, p: [[360,1415],[320,1030],[420,940],[620,1015],[720,1160],[800,1230],[950,1160],[1150,1040],[1340,1020],[1440,935],[1580,860],[1706,778],[1830,715]] },
+          // прямая дорога Шихово — Киров
+          { w: 5, p: [[800,1230],[690,1300],[570,1362],[360,1415]] },
+          // ответвление на Бобино
+          { w: 4, p: [[620,1015],[640,940],[626,875]] },
+          // на Порошино
+          { w: 4, p: [[680,1318],[715,1365],[743,1388]] },
+          // на Межколхозстрой
+          { w: 4, p: [[1706,778],[1750,880],[1762,973]] },
+          // из Слободского через Денисовы на Совье
+          { w: 4, p: [[1830,715],[1775,620],[1755,537],[1735,380],[1620,250],[1400,170],[1230,190],[1085,230]] },
+        ];
+        var KX = 0.34, KY = 0.30, OX = -90, OY = -30;
+        function mx(v) { return Math.round(v * KX + OX); }
+        function my(v) { return Math.round(v * KY + OY); }
+        function pl(arr) { return arr.map(function (q) { return mx(q[0]) + "," + my(q[1]); }).join(" "); }
+        var FORESTS = [
+          [[900,60],[1500,20],[1750,330],[1500,720],[1150,780],[900,600]],
+          [[100,520],[430,430],[600,690],[520,880],[260,900],[110,700]],
+          [[1300,1160],[1650,1260],[1700,1460],[1300,1500]],
+        ];
+        var RIVERS = [
+          [[2010,0],[1960,300],[1905,560],[1885,800],[1790,1010],[1640,1120],[1690,1290],[1520,1470],[1440,1720]],
+          [[-20,640],[120,860],[300,1050],[420,1170],[470,1330],[450,1500],[430,1720]],
+        ];
         var svc = $("svc"),
           city = $("city"),
           area = $("area");
@@ -990,19 +1049,63 @@
         function fmt(n) {
           return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
         }
+        function zone() {
+          return ZONES.filter(function (z) { return z.id === city.value; })[0];
+        }
+        city.innerHTML = ZONES.map(function (z) {
+          return '<option value="' + z.id + '">' + z.n + "</option>";
+        }).join("");
+
+        var mapEl = $("map");
+        var pts = ZONES.filter(function (z) { return z.x; });
+        var html = '<defs><clipPath id="mclip"><rect width="600" height="440" rx="12"/></clipPath></defs>' +
+          '<g clip-path="url(#mclip)"><rect class="mapbg" width="600" height="440"/>';
+        FORESTS.forEach(function (f) { html += '<polygon class="forest" points="' + pl(f) + '"/>'; });
+        html += '<ellipse class="town" cx="' + mx(360) + '" cy="' + my(1400) + '" rx="46" ry="36"/>';
+        RIVERS.forEach(function (r) { html += '<polyline class="river" points="' + pl(r) + '"/>'; });
+        ROADS.forEach(function (r) { html += '<polyline class="road" style="stroke-width:' + r.w + 'px" points="' + pl(r.p) + '"/>'; });
+        html += '</g>';
+        pts.forEach(function (z) {
+          var r = z.kir ? 14 : z.home ? 12 : 9, X = mx(z.x), Y = my(z.y), tx = X, ty = Y, anc = "middle";
+          if (z.lp === "t") ty = Y - r - 8;
+          else if (z.lp === "l") { tx = X - r - 8; ty = Y + 5; anc = "end"; }
+          else if (z.lp === "r") { tx = X + r + 8; ty = Y + 5; anc = "start"; }
+          else ty = Y + r + 18;
+          html += '<g class="pin' + (z.home ? " home" : "") + (z.kir ? " kir" : "") +
+            '" data-id="' + z.id + '" tabindex="0" role="button" aria-label="' + z.n + '">' +
+            '<circle cx="' + X + '" cy="' + Y + '" r="' + r + '"/>' +
+            '<text x="' + tx + '" y="' + ty + '" text-anchor="' + anc + '">' + (z.short || z.n) + "</text></g>";
+        });
+        mapEl.innerHTML = html;
+
+        function feeText(z) { return z.fee ? "выезд +" + fmt(z.fee) + " руб." : "выезд бесплатно"; }
+        function selectZone(id) {
+          city.value = id;
+          calc();
+        }
+        mapEl.addEventListener("click", function (e) {
+          var g = e.target.closest(".pin");
+          if (g) selectZone(g.getAttribute("data-id"));
+        });
+        mapEl.addEventListener("keydown", function (e) {
+          var g = e.target.closest(".pin");
+          if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); selectZone(g.getAttribute("data-id")); }
+        });
 
         function calc() {
-          var a = +area.value,
-            rate = +svc.value,
-            k = +city.value;
-          var p = Math.max(500, Math.round((a * rate * k) / 100) * 100);
+          var a = +area.value, rate = +svc.value, z = zone();
+          var work = Math.max(1200, Math.round((a * rate) / 50) * 50);
+          var p = work + z.fee;
           $("areaVal").textContent = fmt(a) + " м²";
           $("price").textContent = "от " + fmt(p) + " руб.";
-          var fast = city.selectedIndex < 2;
-          $("fast").classList.toggle("on", fast);
-          $("cnote").textContent = fast
-            ? "Минимальный заказ — 500 руб."
-            : "Киров: выезд по графику или на крупные объекты. Минимум — 500 руб.";
+          $("fast").classList.toggle("on", !!z.home);
+          $("cnote").textContent = fmt(a) + " м² × " + rate + " руб. = " + fmt(work) + " руб." +
+            (z.fee ? " + выезд " + fmt(z.fee) + " руб." : ", выезд бесплатно");
+          document.querySelectorAll(".pin").forEach(function (g) {
+            g.classList.toggle("on", g.getAttribute("data-id") === z.id);
+          });
+          $("mapInfo").innerHTML = "<span><b>" + z.n + "</b>: " + z.t + ", " + feeText(z) +
+            '</span><a href="#calc">Рассчитать для этого места</a>';
         }
 
         [svc, city, area].forEach(function (e) {
@@ -1034,17 +1137,25 @@
 
         $("calcSend").onclick = function () {
           $("msg").value =
-            "Расчёт с сайта: " +
-            svc.options[svc.selectedIndex].text +
-            ", " +
-            city.options[city.selectedIndex].text +
-            ", " +
-            area.value +
-            " м², " +
-            $("price").textContent;
+            "Расчёт с сайта: " + svc.options[svc.selectedIndex].text + ", " +
+            zone().n + ", " + area.value + " м², " + $("price").textContent;
           $("order").scrollIntoView({ behavior: "smooth" });
           $("phone").focus();
         };
+
+        function send(data) {
+          function once() {
+            return fetch("/api/send", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+          }
+          return once()
+            .catch(function () {
+              return new Promise(function (res) { setTimeout(res, 1500); }).then(once);
+            });
+        }
 
         $("leadForm").addEventListener("submit", function (e) {
           e.preventDefault();
@@ -1070,23 +1181,22 @@
           btn.innerHTML =
             '<i class="fa-solid fa-spinner fa-spin"></i> Отправка...';
 
-          fetch("/api/send", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: name, phone: ph.value, msg: msg }),
-          })
+          send({ name: name, phone: ph.value, msg: msg, website: $("website").value })
             .then(function (response) {
               if (response.ok) {
                 $("leadForm").reset();
                 openOk();
-              } else {
-                throw new Error("Ошибка сервера");
+                return;
               }
+              return response.json().catch(function () { return {}; }).then(function (d) {
+                throw new Error(response.status + (d.error ? ": " + d.error : ""));
+              });
             })
             .catch(function (error) {
               console.error("Ошибка:", error);
+              $("errCode").textContent = "Причина: " + (error.message === "Failed to fetch"
+                ? "нет связи с сервером сайта" : error.message);
               $("fallbackMsg").style.display = "block";
-              $("vkFallbackLink").href = "https://vk.me/greme231";
             })
             .finally(function () {
               btn.disabled = false;
