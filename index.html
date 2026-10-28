@@ -650,7 +650,7 @@
       .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
     </style>
   <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Снегу-Нет43","description":"Уборка снега вручную и очистка крыш. Вахруши, Слободской, Киров.","telephone":"+79127063203","priceRange":"от 1200 ₽","areaServed":["Вахруши","Слободской","Слободской район","Киров"],"openingHours":"Mo-Su 00:00-24:00","address":{"@type":"PostalAddress","addressRegion":"Кировская область","addressCountry":"RU"}}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Снегу-Нет43","description":"Уборка снега вручную и очистка крыш. Вахруши, Слободской, Киров.","telephone":"+79127063203","priceRange":"от 600 ₽","areaServed":["Вахруши","Слободской","Слободской район","Киров"],"openingHours":"Mo-Su 00:00-24:00","address":{"@type":"PostalAddress","addressRegion":"Кировская область","addressCountry":"RU"}}
 </script>
 </head>
   <body>
@@ -664,7 +664,7 @@
           <a class="tel" href="tel:+79127063203"
             ><i class="fa-solid fa-phone"></i>+7 (912) 706-32-03</a
           >
-          <a href="#order" class="btn sm">Вызвать бригаду</a>
+          <a href="#order" class="btn sm">Заказать уборку</a>
         </div>
       </div>
     </header>
@@ -733,7 +733,7 @@
         <div class="wrap">
           <h2>Узнайте примерную цену</h2>
           <p class="lead">
-            Считаем по площади: уборка вручную от 1 200 руб. за 50 м². Точную стоимость назовём после уточнения объёма снега и подъезда.
+            Считаем по площади и высоте снега: при лёгком снеге (до 10 см) уборка вручную от 600 руб. за 50 м². Точную стоимость назовём после уточнения объёма снега и подъезда.
           </p>
           <div class="calc-box">
             <div>
@@ -752,13 +752,22 @@
                 </div>
               </div>
               <div class="field">
+                <label for="depth">Высота снега</label>
+                <select id="depth">
+                  <option value="0.5" data-s="до 10 см" selected>Лёгкий снег, до 10 см</option>
+                  <option value="1" data-s="10–30 см">Средний, 10–30 см</option>
+                  <option value="2" data-s="30–100 см">Много снега, 30–100 см</option>
+                  <option value="3" data-s="100 см и более">Сугробы, 100 см и более</option>
+                </select>
+              </div>
+              <div class="field">
                 <label for="area">Площадь территории <span class="area-val" id="areaVal">500 м²</span></label>
                 <input type="range" id="area" min="50" max="2000" step="10" value="500" />
               </div>
             </div>
             <div class="result">
               <small>Примерная стоимость</small>
-              <div class="price" id="price">от 1 200 руб.</div>
+              <div class="price" id="price">от 6 000 руб.</div>
               <div class="note" id="cnote"></div>
               <button class="btn" type="button" id="calcSend">
                 <i class="fa-solid fa-paper-plane"></i>Заказать по этой цене
@@ -1044,7 +1053,8 @@
         ];
         var svc = $("svc"),
           city = $("city"),
-          area = $("area");
+          area = $("area"),
+          depth = $("depth");
 
         function fmt(n) {
           return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "\u00A0");
@@ -1094,12 +1104,13 @@
 
         function calc() {
           var a = +area.value, rate = +svc.value, z = zone();
-          var work = Math.max(1200, Math.round((a * rate) / 50) * 50);
+          var m = +depth.value;
+          var work = Math.round((Math.max(1200, Math.round((a * rate) / 50) * 50) * m) / 50) * 50;
           var p = work + z.fee;
           $("areaVal").textContent = fmt(a) + " м²";
           $("price").textContent = "от " + fmt(p) + " руб.";
           $("fast").classList.toggle("on", !!z.home);
-          $("cnote").textContent = fmt(a) + " м² × " + rate + " руб. = " + fmt(work) + " руб." +
+          $("cnote").textContent = fmt(a) + " м², снег " + depth.options[depth.selectedIndex].getAttribute("data-s") + ": " + fmt(work) + " руб." +
             (z.fee ? " + выезд " + fmt(z.fee) + " руб." : ", выезд бесплатно");
           document.querySelectorAll(".pin").forEach(function (g) {
             g.classList.toggle("on", g.getAttribute("data-id") === z.id);
@@ -1108,7 +1119,7 @@
             '</span><a href="#calc">Рассчитать для этого места</a>';
         }
 
-        [svc, city, area].forEach(function (e) {
+        [svc, city, area, depth].forEach(function (e) {
           e.addEventListener("input", calc);
         });
         calc();
@@ -1138,7 +1149,7 @@
         $("calcSend").onclick = function () {
           $("msg").value =
             "Расчёт с сайта: " + svc.options[svc.selectedIndex].text + ", " +
-            zone().n + ", " + area.value + " м², " + $("price").textContent;
+            zone().n + ", " + area.value + " м², снег " + depth.options[depth.selectedIndex].getAttribute("data-s") + ", " + $("price").textContent;
           $("order").scrollIntoView({ behavior: "smooth" });
           $("phone").focus();
         };
