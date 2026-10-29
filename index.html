@@ -649,7 +649,7 @@
       }
       .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
     </style>
-    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <meta name="theme-color" content="#0b2a4a" />
@@ -940,12 +940,13 @@
             </button>
 
             <div class="fallback-msg" id="fallbackMsg">
-              <i class="fa-solid fa-triangle-exclamation"></i> Заявка не ушла.
-              <br />Позвоните нам или напишите во ВКонтакте, ответим сразу:
-              <div id="errCode" style="font-size:13px;opacity:.8;margin-top:6px"></div>
-              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px">
-                <a href="tel:+79127063203" class="btn sm"><i class="fa-solid fa-phone"></i> Позвонить</a>
-                <a id="vkFallbackLink" href="https://vk.me/greme231" target="_blank" rel="noopener" class="btn vk sm"><i class="fa-brands fa-vk"></i> ВКонтакте</a>
+              <b>Не получилось отправить заявку.</b><br />
+              Это сбой на нашей стороне, извините. Позвоните или напишите нам, ответим сразу:
+              <div id="errCode" style="display:none;font-size:12px;opacity:.7;margin-top:6px"></div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px">
+                <a href="tel:+79127063203" class="btn"><i class="fa-solid fa-phone"></i> Позвонить</a>
+                <a id="vkFallbackLink" href="https://vk.me/greme231" target="_blank" rel="noopener" class="btn vk" style="margin-top:0"><i class="fa-brands fa-vk"></i> ВКонтакте</a>
+                <a id="smsFallbackLink" href="sms:+79127063203" class="btn" style="background:#fff;border:2px solid var(--line)"><i class="fa-solid fa-message"></i> Написать СМС</a>
               </div>
             </div>
 
@@ -1014,9 +1015,11 @@
         };
 
         // Настройки отправки заявок.
-        // Ключ Web3Forms получают бесплатно на web3forms.com (вводите почту, ключ придёт на неё).
-        // Он не секретный, его можно держать в открытом коде. Если ключ пустой, работает только /api/send (Vercel).
-        var CONFIG = { web3formsKey: "" };
+        // web3formsKey: бесплатный ключ с web3forms.com (вводите свою почту, ключ придёт на неё). Заявки будут приходить на эту почту.
+        //   Ключ не секретный, его можно держать в открытом коде.
+        // useApi: true только если сайт лежит на Vercel и там есть api/send.js (Telegram / ВКонтакте / СМС).
+        //   На GitHub Pages оставьте false.
+        var CONFIG = { web3formsKey: "", useApi: false };
         var ZONES = [
           // x, y — положение на карте (в пикселях скриншота Яндекс Карт), lp — где подпись: t/b/l/r
           { id: "vah", n: "Вахруши", x: 1383, y: 998, fee: 0, t: "подача 30–40 мин", home: 1, lp: "b" },
@@ -1197,13 +1200,20 @@
             });
           }
 
-          // Сначала серверная функция (Vercel → Telegram), если её нет (GitHub Pages), то письмо через Web3Forms
-          return viaApi().catch(function (apiErr) {
-            if (!CONFIG.web3formsKey) throw apiErr;
-            return viaMail().catch(function (mailErr) {
-              throw new Error(apiErr.message + " | " + mailErr.message);
+          var tries = [];
+          if (CONFIG.useApi) tries.push(viaApi);
+          if (CONFIG.web3formsKey) tries.push(viaMail);
+          if (!tries.length) {
+            return Promise.reject(new Error("отправка не настроена: вставьте ключ Web3Forms в CONFIG"));
+          }
+          function run(i, errs) {
+            if (i >= tries.length) return Promise.reject(new Error(errs.join(" | ")));
+            return tries[i]().catch(function (e) {
+              errs.push(e.message);
+              return run(i + 1, errs);
             });
-          });
+          }
+          return run(0, []);
         }
 
         $("leadForm").addEventListener("submit", function (e) {
@@ -1238,11 +1248,13 @@
             .catch(function (error) {
               console.error("Ошибка:", error);
               var em = error.message || "";
-              $("errCode").textContent = "Причина: " + (em === "Failed to fetch"
-                ? "нет связи с сервером сайта"
-                : /^(404|405)/.test(em)
-                ? em + " — на этом хостинге нет серверной части. Вставьте ключ Web3Forms в CONFIG или выложите сайт на Vercel"
-                : em);
+              // техническая причина видна только владельцу: откройте сайт с #debug в конце адреса
+              if (location.hash === "#debug") {
+                $("errCode").textContent = "Причина: " + em;
+                $("errCode").style.display = "block";
+              }
+              $("smsFallbackLink").href = "sms:+79127063203?&body=" + encodeURIComponent(
+                "Заявка с сайта. " + (name ? name + ". " : "") + ph.value + (msg ? ". " + msg : ""));
               $("fallbackMsg").style.display = "block";
             })
             .finally(function () {
